@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STEM APTITUDE for LIT FEST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0b24;--card:#17143a;--ink:#f4f2ff;--mute:#a9a4d6;--r:#ff3d71;--o:#ff9f1c;--y:#ffd60a;--g:#2ee6a6;--b:#19c3ff;--v:#8a5cff;
+--spec:linear-gradient(90deg,var(--r),var(--o),var(--y),var(--g),var(--b),var(--v))}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{background:radial-gradient(circle at 15% -10%,#2a1b6e 0,transparent 45%),radial-gradient(circle at 100% 110%,#0b3a5c 0,transparent 40%),var(--bg);color:var(--ink);font:500 1rem/1.5 Outfit,system-ui,sans-serif;user-select:none;-webkit-user-select:none;padding-bottom:2rem}
+body:before{content:"";display:block;height:6px;background:var(--spec)}
+header{text-align:center;padding:2rem 1rem 1rem}
+h1{font:800 clamp(1.6rem,6vw,3.2rem)/1.1 Unbounded,sans-serif;background:var(--spec);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em}
+header p{color:var(--mute);margin-top:.6rem}
+main{max-width:760px;margin:0 auto;padding:0 1rem}
+.card{background:var(--card);border-radius:20px;padding:1.5rem;border:1px solid #ffffff1a;box-shadow:0 20px 60px #0008}
+.hide{display:none!important}
+label{display:block;font-weight:600;margin:1rem 0 .3rem}
+input,select{width:100%;padding:.8rem 1rem;border-radius:12px;border:2px solid #ffffff26;background:#0d0b24;color:var(--ink);font:inherit;user-select:text;-webkit-user-select:text}
+input:focus,select:focus,button:focus-visible,.opt:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+ul.rules{margin:1rem 0 0 1.2rem;color:var(--mute)}
+ul.rules li{margin:.3rem 0}ul.rules b{color:var(--y)}
+button{font:600 1rem Outfit,sans-serif;border:0;border-radius:14px;padding:.85rem 1.4rem;cursor:pointer;color:#0d0b24;background:var(--spec);transition:transform .15s}
+button:hover{transform:translateY(-2px)}
+button.ghost{background:#ffffff14;color:var(--ink)}
+button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.start{width:100%;margin-top:1.5rem;font-size:1.1rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;font-weight:600}
+#timer{font:800 1.2rem Unbounded,sans-serif;color:var(--g)}#timer.low{color:var(--r)}
+.bar{height:8px;border-radius:8px;background:#ffffff1a;overflow:hidden;margin-bottom:1rem}
+.bar i{display:block;height:100%;width:0;background:var(--spec);transition:width .3s}
+#hintbox{margin-top:.8rem;padding:.8rem 1rem;border-radius:12px;background:#ffd60a22;border:2px dashed var(--y);color:var(--y)}#qtext{font-size:clamp(1.1rem,3.4vw,1.35rem);font-weight:600;margin-bottom:1.2rem}
+.opt{display:flex;gap:.8rem;align-items:flex-start;padding:.9rem 1rem;margin:.6rem 0;border-radius:14px;border:2px solid #ffffff26;cursor:pointer;background:#ffffff08;transition:.15s}
+.opt:hover{border-color:var(--b)}
+.opt .k{flex:none;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;background:#ffffff1f;font-weight:600}
+.opt.sel{border-color:var(--g);background:#2ee6a61f}.opt.sel .k{background:var(--g);color:#0d0b24}
+.nav{display:flex;justify-content:space-between;gap:.6rem;margin-top:1.2rem}
+.pal{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem}
+.pal b{width:2rem;height:2rem;border-radius:8px;display:grid;place-items:center;font-size:.85rem;background:#ffffff14;cursor:pointer}
+.pal b.done{background:var(--v)}.pal b.cur{outline:2px solid var(--y)}
+.score{font:800 clamp(3rem,16vw,6rem)/1 Unbounded,sans-serif;background:var(--spec);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;margin:1rem 0}
+.res{text-align:center}.res .why{color:var(--o);margin:.5rem 0}
+.note{font-size:.85rem;color:var(--mute);margin-top:1rem}
+#modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:1rem;z-index:10}#modal .card{max-width:420px;width:100%;font-weight:600}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>STEM APTITUDE for LIT FEST</h1>
+  <p>Grades 1 - 5 &bull; Electronics &bull; Maths &bull; Science &amp; IQ</p>
+</header>
+<main>
+  <section id="home" class="card">
+    <label for="nm">Full name</label><input id="nm" autocomplete="off" maxlength="60">
+    <label for="gr">Grade</label>
+    <select id="gr"><option value="">Select your grade</option><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option></select>
+    <label for="cl">Section</label><input id="cl" placeholder="e.g. B" autocomplete="off" maxlength="6">
+    <label for="ad">Admission ID</label><input id="ad" autocomplete="off" maxlength="20">
+    <ul class="rules">
+      <li>The last 4 questions are hard and have a <b>Hint</b> button to help you.</li>
+      <li>25 questions, <b id="mins">25</b> minutes. One mark each, no negative marking.</li>
+      <li><b>Stay on this page.</b> Switching tabs or apps, leaving fullscreen, splitting the screen or moving the cursor out of the page ends the test instantly.</li>
+      <li>Your marks are shown on screen when the test ends.</li>
+    </ul>
+    <p id="err" class="note" style="color:var(--r)"></p>
+    <button class="start" id="go">Start test</button>
+  </section>
+
+  <section id="quiz" class="card hide">
+    <div class="top"><span id="prog"></span><span id="timer">00:00</span></div>
+    <div class="bar"><i id="fill"></i></div>
+    <p id="qtext"></p><div id="opts"></div>
+    <button class="ghost hide" id="hintbtn">Show hint</button><p id="hintbox" class="hide"></p>
+    <div class="nav"><button class="ghost" id="prev">Previous</button><button id="next">Next</button></div>
+    <div class="pal" id="pal"></div>
+  </section>
+
+  <section id="end" class="card res hide">
+    <h2 id="who"></h2>
+    <div class="score" id="sc"></div>
+    <p id="pc"></p><p class="why" id="why"></p>
+    <p class="note" id="sent"></p>
+    <button id="again" style="margin-top:1.2rem">Next student</button>
+  </section>
+</main>
+<div id="modal" class="hide"><div class="card"><p id="mtxt"></p><div class="nav"><button class="ghost" id="mno">Go back</button><button id="myes">Submit test</button></div></div></div>
+
+<script>
+/* ===== SETTINGS ===== */
+const ENDPOINT = "";          // paste your Google Apps Script Web App URL here
+const EMAIL_KEY = "7626860b-1557-4101-bbcd-4a2ede6217a3";         // optional: Web3Forms access key, emails every result to you
+const MINUTES  = 25;          // test duration
+const CURSOR_LEAVE_ENDS = true; // end test if mouse leaves the page (desktop only)
+
+/* Each question: [text, [CORRECT answer first, wrong, wrong, wrong], optional hint]. Options are shuffled for every student. */
+const BANK = {"A":[["Which one do we press to turn a light ON or OFF?",["Switch","Socket","Plug","Fuse"]],
+["Which part of a torch stores the energy that makes it glow?",["Cells","Switch","Bulb","Case"]],
+["Which of these should we NEVER touch with wet hands?",["Electric switch","Wooden table","Plastic spoon","Rubber ball"]],
+["Which of these works only with electricity?",["Ceiling fan","Candle","Matchstick","Kite"]],
+["What is 7 + 6?",["13","12","14","11"]],
+["What is 15 − 8?",["7","6","8","9"]],
+["What comes next? 3, 6, 9, 12, __",["15","14","16","18"]],
+["Which shape has 4 equal sides?",["Square","Rectangle","Triangle","Circle"]],
+["Which is the biggest number?",["100","98","89","99"]],
+["Which of these animals lays eggs?",["Hen","Bat","Whale","Dolphin"]],
+["Which material lets electricity pass through it?",["Iron","Rubber","Plastic","Wood"]],
+["Which material does NOT let electricity pass through it?",["Plastic","Copper","Iron","Silver"]],
+["A bulb glows only when the electric circuit is:",["Complete (closed)","Open","Broken","Cut"]],
+["You press the switch of a torch but the bulb does not glow. What is the most likely reason?",["The cells are finished","The torch is red","The torch is heavy","The room is bright"]],
+["Which of these does NOT run on electricity?",["Hand paper fan","TV","Tubelight","Mixer"]],
+["What comes next? 2, 4, 6, 8, __",["10","9","12","11"]],
+["One hand has 5 fingers. How many fingers are there on 3 hands?",["15","10","8","20"]],
+["Find the odd one out: 2, 4, 7, 8",["7","2","4","8"]],
+["An ice cube is left in the hot sun. What does it become?",["Water","Stone","Smoke","Sand"]],
+["Which of these gives us both heat and light?",["Sun","Moon","Mirror","Cloud"]],
+["Which of these is NOT a living thing?",["Pebble","Dog","Tree","Ant"]],
+["Tom has 10 marbles. He gives 3 marbles to Ria. How many marbles does Tom have now?",["7","6","8","13"],"10 − 3 = 7."],
+["A circuit has a cell, a bulb and a switch joined properly by wires. The switch is turned ON. What happens to the bulb?",["It glows","It does not glow","It breaks","It melts"],"switch ON means a closed circuit."],
+["I have two hands but I cannot clap. What am I?",["Clock","Chair","Book","Pen"],"Think about something that shows the time."],
+["Ravi draws 2 triangles. How many sides are there in all?",["6","5","8","3"],"3 + 3 = 6."]],"B":[["Which part of a simple circuit is used to break the path and stop the current?",["Switch","Bulb","Cell","Wire"]],
+["Which of these is a good conductor of electricity?",["Copper","Glass","Rubber","Dry wood"]],
+["Electric wires are covered with which insulator?",["Plastic","Copper","Iron","Aluminium"]],
+["The two ends (terminals) of a cell are called:",["Positive and negative","North and south","Hot and cold","Up and down"]],
+["Which safety device melts when too much current flows through it?",["Fuse","Switch","Bulb","Socket"]],
+["What is 8 × 7?",["56","54","63","48"]],
+["What is 81 ÷ 9?",["9","8","7","6"]],
+["What comes next? 5, 10, 20, 40, __",["80","60","70","50"]],
+["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Mercury"]],
+["At normal pressure, water boils at how many degrees Celsius?",["100 °C","90 °C","110 °C","212 °C"]],
+["Two bulbs are joined one after the other in a single loop with a cell (series). If one bulb is removed, what happens to the other bulb?",["It goes off","It glows brighter","It stays the same","It blinks"]],
+["Two bulbs are joined to a cell on separate side-by-side paths (parallel). If one bulb is removed, the other bulb:",["Keeps glowing","Goes off","Glows dim","Breaks"]],
+["Which object, placed in the gap of an open circuit, will make the bulb glow?",["Steel spoon","Rubber band","Plastic scale","Wooden stick"]],
+["Which of these is a source of electricity?",["Cell","Switch","Bulb","Wire"]],
+["Which fraction is equal to 2/4?",["1/2","1/3","2/3","3/4"]],
+["A square has each side 6 cm. What is its perimeter?",["24 cm","12 cm","36 cm","18 cm"]],
+["Which one of these is NOT a prime number?",["9","2","5","11"]],
+["Which part of a plant makes food using sunlight?",["Leaf","Root","Stem","Flower"]],
+["What does a thermometer measure?",["Temperature","Weight","Length","Time"]],
+["When we rub our hands together they become warm. This is because of:",["Friction","Magnetism","Light","Sound"]],
+["Which of these will be attracted by a magnet?",["Iron nail","Copper wire","Plastic spoon","Aluminium foil"]],
+["Each cell is 1.5 V. Two such cells are joined end to end (positive to negative) in a line. What is the total voltage?",["3 V","1.5 V","4.5 V","6 V"],"1.5 + 1.5 = 3 V."],
+["If A = 1, B = 2 and C = 3, what is the value of A + B + C?",["6","5","7","9"],"1 + 2 + 3 = 6."],
+["Ria is 8 years old. Her brother is 3 years older than her. How old will her brother be after 2 years?",["13","11","12","14"],"brother is 11 now, 13 after 2 years."],
+["A pencil costs ₹5. Ravi buys 6 pencils and gives ₹50 to the shopkeeper. How much money does he get back?",["₹20","₹30","₹15","₹25"],"6 × 5 = 30, and 50 − 30 = 20."]],"C":[["What is the unit of electric current?",["Ampere","Volt","Watt","Ohm"]],
+["In an LED, the longer leg is the:",["Positive leg (anode)","Negative leg (cathode)","Neutral leg","Earth leg"]],
+["Which device changes electrical energy into sound?",["Buzzer","Motor","Heater","Battery"]],
+["Electric current in a wire is the flow of:",["Electrons","Protons","Neutrons","Atoms"]],
+["What is the unit of electrical resistance?",["Ohm","Ampere","Volt","Joule"]],
+["What does a resistor do in a circuit?",["Limits the flow of current","Stores electric charge","Increases voltage","Produces sound"]],
+["The wire inside a fuse has:",["A low melting point","A high melting point","Zero resistance","Strong magnetism"]],
+["What is 25% of 240?",["60","50","80","120"]],
+["What is 0.5 + 0.25?",["0.75","0.30","0.70","7.5"]],
+["What comes next? 1, 4, 9, 16, 25, __",["36","30","34","49"]],
+["Two identical bulbs are joined in series with one cell. Compared to a single bulb with the same cell, each bulb glows:",["Dimmer","Brighter","The same","Not at all"]],
+["The lights and fans in a house are connected in:",["Parallel","Series","A single loop","A chain"]],
+["Which of these can generate electricity from motion?",["Dynamo","Resistor","Switch","Buzzer"]],
+["Which instrument is used to measure electric current?",["Ammeter","Voltmeter","Thermometer","Barometer"]],
+["What is 1/2 + 1/4?",["3/4","2/6","2/8","1/6"]],
+["What is the average of 10, 20 and 30?",["20","15","25","30"]],
+["Which of these is NOT an electronic component?",["Spring balance","LED","Resistor","Capacitor"]],
+["What is the binary number 11 in our normal (decimal) numbers?",["3","2","4","11"]],
+["For photosynthesis, a plant needs:",["Carbon dioxide, water and sunlight","Oxygen, water and sunlight","Carbon dioxide, oxygen and soil","Water, nitrogen and heat"]],
+["What energy change takes place in a solar panel?",["Light to electrical","Heat to sound","Electrical to light","Chemical to heat"]],
+["A 100 m long train crosses a pole in 10 seconds. What is its speed?",["10 m/s","1 m/s","20 m/s","100 m/s"]],
+["A bulb works on 6 V and draws 2 A of current. What is its resistance? (R = V ÷ I)",["3 Ω","12 Ω","4 Ω","8 Ω"],"R = 6 ÷ 2 = 3 Ω."],
+["The sum of two consecutive numbers is 51. What is the larger number?",["26","25","27","24"],"25 + 26 = 51."],
+["What comes next? 1, 3, 6, 10, __",["15","13","14","16"],"differences are +2, +3, +4, +5."],
+["Two 10 Ω resistors are joined in series. What is the total resistance?",["20 Ω","5 Ω","10 Ω","100 Ω"],"in series, resistances add: 10 + 10 = 20 Ω."]]};
+
+/* ===== LOGIC ===== */
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q=[],ans=[],hints=[],cur=0,live=false,left=0,tick,t0,baseW,baseH,student={};
+$("mins").textContent=MINUTES;
+
+$("go").onclick=async()=>{
+  const nm=$("nm").value.trim(),sec=$("cl").value.trim(),ad=$("ad").value.trim(),g=$("gr").value;
+  if(nm.length<3||!g||!sec||!ad){$("err").textContent="Enter your full name, grade, section and admission ID to begin.";return}
+  const set=+g<=2?"A":+g<=4?"B":"C";
+  student={name:nm,cls:g+"-"+sec,adm:ad,set:{A:"Grades 1-2",B:"Grades 3-4",C:"Grade 5"}[set]};
+  Q=shuf(BANK[set]).map(q=>{const o=shuf(q[1].map((t,i)=>({t,ok:i===0})));return{q:q[0],o,h:q[2]||""}});
+  ans=Array(Q.length).fill(null);hints=Array(Q.length).fill(false);
+  try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen()}catch(e){}
+  $("home").classList.add("hide");$("quiz").classList.remove("hide");
+  baseW=innerWidth;baseH=innerHeight;t0=Date.now();left=MINUTES*60;live=true;
+  setTimeout(()=>{baseW=innerWidth;baseH=innerHeight},600);
+  tick=setInterval(()=>{left--;draw();if(left<=0)finish("Time is up")},1000);
+  show(0);draw();
+};
+function draw(){const m=Math.max(left,0);$("timer").textContent=String(m/60|0).padStart(2,"0")+":"+String(m%60).padStart(2,"0");$("timer").classList.toggle("low",m<=120)}
+function show(i){
+  cur=i;const q=Q[i];
+  $("prog").textContent="Question "+(i+1)+" of "+Q.length;
+  $("fill").style.width=ans.filter(a=>a!==null).length/Q.length*100+"%";
+  $("qtext").textContent=q.q;
+  $("opts").innerHTML="";
+  q.o.forEach((o,k)=>{
+    const d=document.createElement("div");d.className="opt"+(ans[i]===k?" sel":"");d.tabIndex=0;d.setAttribute("role","button");
+    d.innerHTML='<span class="k">'+"ABCD"[k]+'</span><span></span>';d.lastChild.textContent=o.t;
+    const pick=()=>{ans[i]=k;show(i)};d.onclick=pick;d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}};
+    $("opts").appendChild(d)});
+  $("hintbtn").classList.toggle("hide",!q.h);
+  $("hintbox").classList.toggle("hide",!(q.h&&hints[i]));$("hintbox").textContent="Hint: "+q.h;
+  $("hintbtn").textContent=hints[i]?"Hint shown":"Show hint";
+  $("prev").disabled=i===0;
+  $("next").textContent=i===Q.length-1?"Submit test":"Next";
+  $("pal").innerHTML="";
+  Q.forEach((_,k)=>{const b=document.createElement("b");b.textContent=k+1;b.className=(ans[k]!==null?"done ":"")+(k===i?"cur":"");b.onclick=()=>show(k);$("pal").appendChild(b)});
+}
+$("mno").onclick=()=>$("modal").classList.add("hide");
+$("myes").onclick=()=>{$("modal").classList.add("hide");finish("Submitted by student")};
+$("again").onclick=()=>location.reload();
+$("hintbtn").onclick=()=>{hints[cur]=true;show(cur)};
+$("prev").onclick=()=>show(cur-1);
+$("next").onclick=()=>{
+  if(cur<Q.length-1)return show(cur+1);
+  const un=ans.filter(a=>a===null).length;
+  $("mtxt").textContent=un?un+" question(s) are still unanswered. Submit anyway?":"You have answered all questions. Submit your test now?";
+  $("modal").classList.remove("hide");
+};
+
+function finish(reason){
+  if(!live)return;live=false;clearInterval(tick);
+  if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+  let sc=0;const rows=Q.map((q,i)=>{const c=q.o.find(o=>o.ok).t,ch=ans[i]===null?"(not answered)":q.o[ans[i]].t,ok=ans[i]!==null&&q.o[ans[i]].ok;if(ok)sc++;return{n:i+1,q:q.q,chosen:ch,correct:c,ok,hint:!!hints[i]}});
+  const secs=Math.round((Date.now()-t0)/1000);
+  $("quiz").classList.add("hide");$("modal").classList.add("hide");$("end").classList.remove("hide");
+  $("who").textContent=student.name+" ("+student.cls+", ID "+student.adm+")";
+  $("sc").textContent=sc+" / "+Q.length;
+  $("pc").textContent=Math.round(sc/Q.length*100)+"% - answered "+ans.filter(a=>a!==null).length+" questions in "+(secs/60|0)+"m "+secs%60+"s";
+  $("why").textContent=reason==="Submitted by student"?"Test submitted.":"Test ended: "+reason;
+  send({id:Date.now()+"-"+Math.random().toString(36).slice(2),...student,score:sc,total:Q.length,hintsUsed:hints.filter(Boolean).length,percent:Math.round(sc/Q.length*100),seconds:secs,endReason:reason,answers:rows,time:new Date().toLocaleString()});
+}
+async function send(p){
+  await Promise.all([ENDPOINT?sendSheet(p):0,EMAIL_KEY?sendMail(p):0]);
+  if(!ENDPOINT&&!EMAIL_KEY&&location.hash==="#debug")$("sent").textContent="Nothing was sent: ENDPOINT and EMAIL_KEY are both empty.";
+}
+async function sendMail(p){
+  const say=t=>{if(location.hash==="#debug")$("sent").textContent+=" Email: "+t};
+  const lines=p.answers.map(a=>p.answers.indexOf(a)+1+". "+(a.ok?"RIGHT":"WRONG")+(a.hint?" (hint used)":"")+" | "+a.q+" | chosen: "+a.chosen+" | correct: "+a.correct).join("\n");
+  const body={access_key:EMAIL_KEY,subject:"LIT FEST STEM: "+p.name+" ("+p.cls+") scored "+p.score+"/"+p.total,from_name:"LIT FEST STEM Test",
+    "Admission ID":p.adm,Name:p.name,Class:p.cls,"Question set":p.set,Score:p.score+" / "+p.total,"Hints used":p.hintsUsed,"Time taken (s)":p.seconds,"Ended because":p.endReason,Submitted:p.time,"Answers":lines};
+  for(let i=0;i<3;i++){
+    try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(body)});
+      const j=await r.json();say(j.success?"sent.":"failed - "+j.message);if(j.success)return}
+    catch(e){say("network error")}
+    await new Promise(r=>setTimeout(r,1500));
+  }
+}
+async function sendSheet(p){
+  const dbg=location.hash==="#debug",say=t=>{if(dbg)$("sent").textContent+=" Sheet: "+t};
+  for(let i=0;i<3;i++){
+    try{
+      const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(p)});
+      const t=(await r.text()).trim();say("Server replied: "+t.slice(0,300));
+      if(t==="ok")return;
+    }catch(e){
+      try{await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(p)});say("Sent, but the reply could not be read.");return}
+      catch(e2){say("Network error: "+e2)}
+    }
+    await new Promise(r=>setTimeout(r,1500));
+  }
+  if(!dbg&&!EMAIL_KEY)$("sent").textContent="Please show this screen to the invigilator.";
+}
+
+/* ===== ANTI-CHEAT: any of these ends the test immediately ===== */
+document.addEventListener("visibilitychange",()=>{if(document.hidden)finish("Tab or app was switched")});
+addEventListener("blur",()=>finish("Page lost focus"));
+addEventListener("pagehide",()=>finish("Page was left"));
+document.addEventListener("fullscreenchange",()=>{if(live&&!document.fullscreenElement&&document.documentElement.requestFullscreen)finish("Left fullscreen")});
+addEventListener("resize",()=>{if(live&&(Math.abs(innerWidth-baseW)>120||Math.abs(innerHeight-baseH)>160))finish("Screen was resized or split")});
+document.addEventListener("mouseleave",e=>{if(live&&CURSOR_LEAVE_ENDS&&matchMedia("(hover:hover)").matches)finish("Cursor left the page")});
+["copy","cut","paste","contextmenu","dragstart"].forEach(t=>document.addEventListener(t,e=>{if(live)e.preventDefault()}));
+document.addEventListener("keydown",e=>{if(live&&(e.key==="F12"||e.key==="PrintScreen"||(e.ctrlKey||e.metaKey)&&["c","u","s","p","i","j"].includes(e.key.toLowerCase())))e.preventDefault()});
+</script>
+</body>
+</html>
